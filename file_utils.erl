@@ -1,6 +1,8 @@
 -module(file_utils).
 -export([test/0, read_file/2]).
 
+-define(FILE_EXAMPLE, "test.txt").
+
 %% Open a file and try reading a line or close it on failure 
 read_file(Filepath, Proc) ->
     {ok, Fd} = file:open(Filepath, read),
@@ -22,6 +24,6 @@ read_line(Fd, Proc) ->
 
 test() ->
     PrintLine = fun(Line) -> io:format("~s", [Line]) end,
-    read_file("test.txt", PrintLine),
+    read_file(?FILE_EXAMPLE, PrintLine),
     ok.
 

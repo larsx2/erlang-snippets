@@ -12,10 +12,10 @@ init(_, Req, _Opts) ->
 	{ok, Req, #state{}}.
 
 handle(Req, State=#state{}) ->
+    Body = jiffy:encode({[{hello, <<"world!">>}]}),
 	{ok, Req2} = cowboy_req:reply(200, 
-        [{<<"content-type">>, <<"text/plain">>}], 
-        <<"Hello">>,
-    Req),
+        [{<<"content-type">>, <<"application/json">>}], 
+    Body, Req),
 	{ok, Req2, State}.
 
 terminate(_Reason, _Req, _State) ->
